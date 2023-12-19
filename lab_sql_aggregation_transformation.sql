@@ -62,7 +62,28 @@ order by title;
 Select distinct count(film_id) from film ; 
 
 -- 1.2 The number of films for each rating.
-select count
+select rating, count(rating)
+from film
+group by rating;
 -- 1.3 The number of films for each rating, sorting the results in descending order of the number of films. 
+select rating, count(rating)
+from film
+group by rating order by count(rating) desc;
 -- This will help you to better understand the popularity of different film ratings and adjust purchasing decisions accordingly.
 
+
+-- Using the film table, determine:
+-- 2.1 The mean film duration for each rating, and sort the results in descending order of the mean duration.
+-- Round off the average lengths to two decimal places. This will help identify popular movie lengths for each category.
+select rating, round(avg(length),2)
+from film
+group by rating order by avg(length) desc;
+
+-- 2.2 Identify which ratings have a mean duration of over two hours in order to help select films for customers who prefer longer movies.
+SELECT rating, round(avg(length),2)
+FROM film
+group by rating
+having avg(length) >120;
+
+
+-- 3. Bonus: determine which last names are not repeated in the table actor.
